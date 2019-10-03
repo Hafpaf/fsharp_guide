@@ -17,15 +17,17 @@
 -->
 
 # F\# notes
-**This is by now means a comprehensive list of FSharp syntax,** but it will be updated as i learn more about the language.
+**This is by no means a comprehensive list of FSharp syntax,** but it will be updated as i learn more about the language.
 
-## Install F\# and mono on Arch linux or Manjaro
+## Install F\# and mono
+### Manjaro
 ```bash
-pamac install fsharp-bin mono
+pamac build fsharp-bin && pamac install mono
 ```
-or
+
+### Arch Linux
 ```bash
-sudo pacman -S fsharp-bin mono
+sudo yay -S fsharp-bin mono
 ```
 
 ## Your first F\# program
@@ -33,7 +35,7 @@ sudo pacman -S fsharp-bin mono
 - Create a file called `helloworld.fsx`
 - create a print statement and print a string with:
   - ```FSharp
-    let a = "Hello world
+    let a = "Hello world"
     printfn "Printing: %s" a
     ```
   - `let`: creates here a string with the text "hello world"
