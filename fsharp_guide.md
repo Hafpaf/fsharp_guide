@@ -153,6 +153,36 @@ Use the `fun` argument
 let vs = List.map (fun x -> x+1) [10; 20; 30]
 ```
 
+### Recursive functions
+A function being called within it self.
+
+A recursive function must me called with `rec`.
+```fsharp
+/// print every second number to 20
+let rec function_name a b =
+    if a > b 
+    then printfn "Stopping"
+    else
+        printfn "%A" a
+        function_name (a + 2) b
+        
+
+function_name 1 20
+```
+#### Recursion with lists
+```fsharp
+/// Not working yet, missing anonymous function //// List
+let rec find p xs =
+    if List.isEmpty xs
+    then None
+    else if p (List.head xs)
+        then Some (List.head xs)
+        else find p (List.tail xs)
+
+let xs [1;2;3]
+printfn // anon fun
+```
+
 ## Resources
 - [Lists](https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/lists)
 - [printfn](https://fsharpforfunandprofit.com/posts/printf/)
