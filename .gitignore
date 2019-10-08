@@ -5,3 +5,6 @@
 *.exe
 FSharp.Core.dll
 *.dll
+
+#ionide files
+.ionide/
