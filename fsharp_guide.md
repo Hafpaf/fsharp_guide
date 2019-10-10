@@ -27,7 +27,7 @@ pamac build fsharp-bin && pamac install mono
 
 ### Arch Linux
 ```bash
-sudo yay -S fsharp-bin mono
+yay -S fsharp-bin mono
 ```
 
 ## Your first F\# program
