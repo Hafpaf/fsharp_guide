@@ -42,7 +42,7 @@
     - [Anonymous functions](#anonymous-functions)
     - [Recursive functions](#recursive-functions)
       - [Recursion with lists](#recursion-with-lists)
-  - [Resources](#resources)
+- [Resources](#resources)
 
 ## Install F\# and mono
 ### Manjaro
@@ -208,7 +208,8 @@ let xs [1;2;3]
 printfn // anon fun
 ```
 
-## Resources
+# Resources
+- A general help is to look in the Microsoft Fsharp [documentation](https://msdn.microsoft.com/en-us/visualfsharpdocs/conceptual/visual-fsharp) and Fsharp [Language Reference](https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/)
 - [Lists](https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/lists)
 - [printfn](https://fsharpforfunandprofit.com/posts/printf/)
 - [index](https://www.tutorialspoint.com/fsharp/fsharp_lists.htm)
