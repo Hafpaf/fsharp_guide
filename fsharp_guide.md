@@ -1,5 +1,6 @@
 <!--
-<one line to give the program's name and a brief idea of what it does.>
+    Guide to Fsharp (F#) written in markdown
+    
     Copyright (C) <2019>  <hafpaf haf@hafnium.me>
 
     This program is free software: you can redistribute it and/or modify
@@ -18,6 +19,30 @@
 
 # F\# notes
 **This is by no means a comprehensive list of FSharp syntax,** but it will be updated as i learn more about the language.
+
+# Table of contents
+- [F\# notes](#f-notes)
+- [Table of contents](#table-of-contents)
+  - [Install F\# and mono](#install-f-and-mono)
+    - [Manjaro](#manjaro)
+    - [Arch Linux](#arch-linux)
+  - [Your first F\# program](#your-first-f-program)
+  - [Run and compile](#run-and-compile)
+    - [Fsharpc inputs](#fsharpc-inputs)
+      - [fsharpc flags](#fsharpc-flags)
+        - [Compile a library](#compile-a-library)
+        - [Compile program with libray](#compile-program-with-libray)
+  - [Printfn](#printfn)
+    - [Printfn properties](#printfn-properties)
+    - [Print multiple items in one print statement](#print-multiple-items-in-one-print-statement)
+    - [Print out a selected item from a list](#print-out-a-selected-item-from-a-list)
+  - [Lists](#lists)
+  - [Libraries and signature files](#libraries-and-signature-files)
+  - [Functions](#functions)
+    - [Anonymous functions](#anonymous-functions)
+    - [Recursive functions](#recursive-functions)
+      - [Recursion with lists](#recursion-with-lists)
+  - [Resources](#resources)
 
 ## Install F\# and mono
 ### Manjaro
