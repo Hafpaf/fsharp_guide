@@ -29,11 +29,13 @@
   - [Your first F\# program](#your-first-f-program)
   - [Run and compile](#run-and-compile)
     - [Fsharpc inputs](#fsharpc-inputs)
-      - [fsharpc flags](#fsharpc-flags)
+      - [Fsharpc flags](#fsharpc-flags)
         - [Compile a library](#compile-a-library)
         - [Compile program with libray](#compile-program-with-libray)
-  - [Printfn](#printfn)
-    - [Printfn properties](#printfn-properties)
+  - [Printf](#printf)
+    - [Printf values](#printf-values)
+    - [Printf properties](#printf-properties)
+    - [Padded formatting](#padded-formatting)
     - [Print multiple items in one print statement](#print-multiple-items-in-one-print-statement)
     - [Print out a selected item from a list](#print-out-a-selected-item-from-a-list)
   - [Lists](#lists)
@@ -66,7 +68,7 @@ yay -S fsharp-bin mono
   - `let`: creates here a string with the text "hello world"
   - `a`: is the name of the variable
   - `printfn`: prints out in the terminal
-  - `"Printing: %s"`: print a string with the input `%s` and and the value for `%s` is `a`
+  - `"Printing: %s"`: print a string with the input `%s` where the value for `%s` is `a`
 - Go to your terminal and run the program with
   -  fsharpi `helloworld.fsx`
 
@@ -77,7 +79,7 @@ fsharpc --nologo helloworld.fsx && mono helloworld.exe
 ```
 Compile the program `helloworld.fsx` and run with mono
 ### Fsharpc inputs
-#### fsharpc flags
+#### Fsharpc flags
 ```bash
 OUTPUT FILES
     --target:library, -a
@@ -95,7 +97,7 @@ INPUT FILES
 # -a: --target:library, Build a library
 # --out:vec2d.dll: Name the output file
 
-#Compile library with a sigtnature file
+#Compile library with a signature file
 fsharpc --nologo signature_file.fsi library_functions.fs -a --out:my_library.dll
 ```
 ##### Compile program with libray
@@ -106,10 +108,56 @@ fsharpc --nologo -r my_library.dll program.fsx && mono program.exe
 ```
 
 
-## Printfn
+## Printf
 
-### Printfn properties
-Formatting print statements from [C\# Corner](https://www.c-sharpcorner.com/article/printing-and-formatting-outputs-in-fsharp/)
+`printf` prints out a formatted output to stdout, this means an output that is formatted to your liking.
+
+### Printf values
+There exists a lot of print values. If you only need to print out without formatting then use `printfn`, which create a newline after printing out. You can read more about print values [here](https://msdn.microsoft.com/visualfsharpdocs/conceptual/core.printf-module-[fsharp]#values).
+
+To print out an variable in the form of the integer 2 could be printed out like this. 
+
+```FSharp
+let a = 2
+printfn "%i" a
+```
+
+Output:
+```FSharp
+2
+```
+
+To add some text to the print statement, you could add it withing the quotation marks (`" "`).
+
+```FSharp
+let a = 2
+printfn "This integer has the value %i" a
+```
+
+Output:
+```FSharp
+This integer has the value 2
+```
+
+Or you could print a string and an integer in the same print value.
+
+```FSharp
+let a = "Hello World"
+let b = 1273
+printfn "%s %i" a b
+```
+
+Output
+```FSharp
+Hello World 1273
+```
+
+Notice how we use `%s` and `%i`. These are print properties, `%s` stands for string and `%i` stands for integer. We use this to tell the F\# compiler that we expect the output to be respectively a string and an integer. If they, however are NOT the expected out, the compiler will throw an error. 
+
+### Printf properties
+
+Formatting print statements from [C\# Corner](https://www.c-sharpcorner.com/article/printing-and-formatting-outputs-in-fsharp/).
+Also check out the official [documentation on Github](https://github.com/MicrosoftDocs/visualfsharpdocs/blob/live/docs/conceptual/core.printf-module-[fsharp].md#remarks).
 
 The line: `printfn "text: %s" a`, prints out a string containing the string `a`.
 
@@ -129,7 +177,7 @@ The line: `printfn "text: %s" a`, prints out a string containing the string `a`.
     %g or %G for the more compact of f and e.
     %M for decimals
 
-Padded formatting
+### Padded formatting
 
     %0i pads with zeros
     %5i pads with 5 spaces
@@ -169,7 +217,7 @@ List properties
 
 .fs
 
-To compile se, 'Compile with library' under Fsharpc
+To compile se, [Compile a library](#compile-a-library) under Fsharpc
 ## Functions
 
 ### Anonymous functions
@@ -211,6 +259,7 @@ printfn // anon fun
 # Resources
 - A general help is to look in the Microsoft Fsharp [documentation](https://msdn.microsoft.com/en-us/visualfsharpdocs/conceptual/visual-fsharp) and Fsharp [Language Reference](https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/)
 - [Lists](https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/lists)
-- [printfn](https://fsharpforfunandprofit.com/posts/printf/)
+- [printfn on fsharpforfunandprofit.com](https://fsharpforfunandprofit.com/posts/printf/)
+- [printf documentation on Github.com](https://github.com/MicrosoftDocs/visualfsharpdocs/blob/live/docs/conceptual/core.printf-module-[fsharp].md#remarks)
 - [index](https://www.tutorialspoint.com/fsharp/fsharp_lists.htm)
 - [C\# Corner: printing and formatting outputs in F\#](https://www.c-sharpcorner.com/article/printing-and-formatting-outputs-in-fsharp/)
