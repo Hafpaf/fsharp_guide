@@ -12,6 +12,7 @@ Add to this list of items to somewhat keep track of items that need to be done.
 | Recursion | Needs working examples | 
 | Libraries | Not started | 
 | Lists | Needs more details |
+| XML documentation | Not started |
 | .. |  |
 | .. |  |
 | .. |  |
