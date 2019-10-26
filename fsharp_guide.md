@@ -18,7 +18,7 @@
 -->
 
 # F\# notes
-**This is by no means a comprehensive list of FSharp syntax,** but it will be updated as i learn more about the language.
+**This is by no means a comprehensive list of FSharp syntax,** but it will be updated as I learn more about the language.
 
 # Table of contents
 - [F\# notes](#f-notes)
@@ -29,9 +29,7 @@
   - [Your first F\# program](#your-first-f-program)
   - [Run and compile](#run-and-compile)
     - [Fsharpc inputs](#fsharpc-inputs)
-      - [Fsharpc flags](#fsharpc-flags)
-        - [Compile a library](#compile-a-library)
-        - [Compile program with libray](#compile-program-with-libray)
+      - [Compile flags](#compile-flags)
   - [Printf](#printf)
     - [Printf values](#printf-values)
     - [Printf properties](#printf-properties)
@@ -40,6 +38,11 @@
     - [Print out a selected item from a list](#print-out-a-selected-item-from-a-list)
   - [Lists](#lists)
   - [Libraries and signature files](#libraries-and-signature-files)
+    - [Modules](#modules)
+    - [Libraries](#libraries)
+      - [Compile a library](#compile-a-library)
+      - [Compile program with library](#compile-program-with-library)
+    - [Signature files](#signature-files)
   - [Functions](#functions)
     - [Anonymous functions](#anonymous-functions)
     - [Recursive functions](#recursive-functions)
@@ -79,7 +82,7 @@ fsharpc --nologo helloworld.fsx && mono helloworld.exe
 ```
 Compile the program `helloworld.fsx` and run with mono
 ### Fsharpc inputs
-#### Fsharpc flags
+#### Compile flags
 ```bash
 OUTPUT FILES
     --target:library, -a
@@ -91,22 +94,7 @@ INPUT FILES
             Reference an assembly
 ```
 
-##### Compile a library
-```bash
-#Compiler flags
-# -a: --target:library, Build a library
-# --out:vec2d.dll: Name the output file
-
-#Compile library with a signature file
-fsharpc --nologo signature_file.fsi library_functions.fs -a --out:my_library.dll
-```
-##### Compile program with libray
-```bash
-#Compile program with library
-fsharpc --nologo -r my_library.dll program.fsx && mono program.exe
-
-```
-
+To **compile libraries** and compile programs with libraries, see "[Compile a library](#compile-a-library)", under Libraries and Signature files
 
 ## Printf
 
@@ -213,11 +201,54 @@ List properties
 // Addition of two elements: @ 
 ```
 ## Libraries and signature files
-.fsi
+In F\# it can useful to explicitly describe what you need type your functions input and output should be. If these requirements is not fulfilled, the compiler will throw an error. Libraries and signature is an effective way to describe these
 
-.fs
+A library file uses the file extension `.fs` and the signature file extension uses `.fsi`.
 
-To compile se, [Compile a library](#compile-a-library) under Fsharpc
+### Modules
+The program below takes a list of lists and return one (1) list.
+```FSharp
+let concat (llst:'a list list) : 'a list = 
+    List.concat llst
+printfn "Concatunated list: %A" (concat [[1]; [7; 3]; [5]])
+```
+
+The input called `llst` requires the type `'a list list`, a list of lists. While the output is required to be `a list`, a single list.
+
+### Libraries
+
+File extension: `.fs`
+
+A library is a collection of predefined *types*, *values* and *functions* which is usable by F\# programs. 
+
+```FSharp
+// Calculate length of a vector
+let len (a : float * float) : float =
+  sqrt (fst a **2.0 + snd a**2.0)
+```
+The above function requires input `a` to be have two (2) values, in this case is the x and y coordinate of a vector.
+
+
+#### Compile a library
+```bash
+#Compiler flags
+# -a: --target:library, Build a library
+# --out:my_library.dll: Name the output file
+
+#Compile library with a signature file
+fsharpc --nologo signature_file.fsi library_functions.fs -a --out:my_library.dll
+```
+#### Compile program with library
+```bash
+#Compile program with library
+fsharpc --nologo -r my_library.dll program.fsx && mono program.exe
+
+```
+
+### Signature files
+
+File extension: `.fsi`
+
 ## Functions
 
 ### Anonymous functions
