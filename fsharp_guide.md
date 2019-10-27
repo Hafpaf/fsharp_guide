@@ -40,9 +40,11 @@
   - [Libraries and signature files](#libraries-and-signature-files)
     - [Modules](#modules)
     - [Libraries](#libraries)
+      - [Import library](#import-library)
       - [Compile a library](#compile-a-library)
       - [Compile program with library](#compile-program-with-library)
     - [Signature files](#signature-files)
+    - [Library example](#library-example)
   - [Functions](#functions)
     - [Anonymous functions](#anonymous-functions)
     - [Recursive functions](#recursive-functions)
@@ -201,11 +203,14 @@ List properties
 // Addition of two elements: @ 
 ```
 ## Libraries and signature files
-In F\# it can useful to explicitly describe what you need type your functions input and output should be. If these requirements is not fulfilled, the compiler will throw an error. Libraries and signature is an effective way to describe these
+In F\# it can useful to explicitly describe what type your functions input and output should be. If these requirements is not fulfilled, the compiler will throw an error. Libraries and signature is an effective way to describe these.
 
 A library file uses the file extension `.fs` and the signature file extension uses `.fsi`.
 
 ### Modules
+
+Read more: [Ms docs: Modules](https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/modules)
+
 The program below takes a list of lists and return one (1) list.
 ```FSharp
 let concat (llst:'a list list) : 'a list = 
@@ -219,15 +224,28 @@ The input called `llst` requires the type `'a list list`, a list of lists. While
 
 File extension: `.fs`
 
-A library is a collection of predefined *types*, *values* and *functions* which is usable by F\# programs. 
+A library is a collection of predefined *types*, *values* and *functions* which is usable by F\# programs. The code have already specified what the function `len` should do. We can call the function with the required parameters to run it.
 
 ```FSharp
 // Calculate length of a vector
 let len (a : float * float) : float =
   sqrt (fst a **2.0 + snd a**2.0)
 ```
-The above function requires input `a` to be have two (2) values, in this case is the x and y coordinate of a vector.
+The above function requires input `a` to be have two (2) float values, in this case is the x and y coordinate of a vector. The output is also required to be a float. 
 
+It is also important to look at `fst` (first) and `snd` (second) from the code sample, these are the specify if we are dealing with the first float or the second float, since they cannot be expected have the same value.
+
+#### Import library
+
+Read more: [Ms docs: 'Import Declarations: The open Keyword'](https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/import-declarations-the-open-keyword)
+
+We can call the function `len` to our program by importing a compiled version of out library with the function `open <libraryName>`.
+
+```FSharp
+open Utilities.vectors
+
+printfn "vector length: %f" (Utilities.vectors.len(2.0,3.0))
+```
 
 #### Compile a library
 ```bash
@@ -242,12 +260,25 @@ fsharpc --nologo signature_file.fsi library_functions.fs -a --out:my_library.dll
 ```bash
 #Compile program with library
 fsharpc --nologo -r my_library.dll program.fsx && mono program.exe
-
 ```
 
 ### Signature files
 
-File extension: `.fsi`
+File extension: `.fsi`. [MS docs: Signatures](https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/signature-files).
+
+### Library example
+Look at the files in [./examples/libraries/](./examples/libraries/)
+
+```bash
+#Compile library with a signature file
+[libraries]$ fsharpc --nologo vectors.fsi vectors.fs -a --out:vectors.dll
+
+#Compile program with the library and run it
+[libraries]$ fsharpc --nologo -r vectors.dll vector_test.fsx && mono vector_test.exe
+
+#Output
+vector length: 3.605551
+```
 
 ## Functions
 
@@ -294,3 +325,6 @@ printfn // anon fun
 - [printf documentation on Github.com](https://github.com/MicrosoftDocs/visualfsharpdocs/blob/live/docs/conceptual/core.printf-module-[fsharp].md#remarks)
 - [index](https://www.tutorialspoint.com/fsharp/fsharp_lists.htm)
 - [C\# Corner: printing and formatting outputs in F\#](https://www.c-sharpcorner.com/article/printing-and-formatting-outputs-in-fsharp/)
+- [Signatures](https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/signature-files)
+- [Modules](https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/modules)
+- [Import Declarations: The open Keyword](https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/import-declarations-the-open-keyword)
